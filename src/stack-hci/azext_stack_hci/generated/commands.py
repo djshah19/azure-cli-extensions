@@ -13,7 +13,9 @@
 # pylint: disable=line-too-long
 
 from azure.cli.core.commands import CliCommandType
-from azext_stack_hci.generated._client_factory import cf_arc_setting, cf_cluster, cf_extension
+from azext_stack_hci.generated._client_factory import (cf_arc_setting, cf_cluster, cf_extension,
+                                                      cf_galleryimage, cf_networkinterface, cf_virtualharddisk,
+                                                      cf_virtualmachine, cf_virtualnetwork) 
 
 
 stack_hci_arc_setting = CliCommandType(
@@ -37,6 +39,36 @@ stack_hci_extension = CliCommandType(
     client_factory=cf_extension,
 )
 
+
+stack_hci_galleryimage = CliCommandType(
+    operations_tmpl='azext_stack_hci.vendored_sdks.azurestackhci.operations._galleryimages_operations#Galleryim'
+        'agesOperations.{}',
+    client_factory=cf_galleryimage
+)
+
+
+stack_hci_networkinterface = CliCommandType(
+    operations_tmpl='azext_stack_hci.vendored_sdks.azurestackhci.operations._networkinterfaces_operations#Netwo'
+        'rkinterfacesOperations.{}',
+    client_factory=cf_networkinterface)
+
+
+stack_hci_virtualharddisk = CliCommandType(
+    operations_tmpl='azext_stack_hci.vendored_sdks.azurestackhci.operations._virtualharddisks_operations#Virtua'
+        'lharddisksOperations.{}',
+    client_factory=cf_virtualharddisk)
+
+
+stack_hci_virtualmachine = CliCommandType(
+    operations_tmpl='azext_stack_hci.vendored_sdks.azurestackhci.operations._virtualmachines_operations#Virtual'
+        'machinesOperations.{}',
+    client_factory=cf_virtualmachine)
+
+
+stack_hci_virtualnetwork = CliCommandType(
+    operations_tmpl='azext_stack_hci.vendored_sdks.azurestackhci.operations._virtualnetworks_operations#Virtual'
+        'networksOperations.{}',
+    client_factory=cf_virtualnetwork)
 
 def load_command_table(self, _):
 
@@ -62,3 +94,51 @@ def load_command_table(self, _):
         # g.custom_command('update', 'stack_hci_extension_update', supports_no_wait=True)
         g.custom_command('delete', 'stack_hci_extension_delete', supports_no_wait=True, confirmation=True)
         g.custom_wait_command('wait', 'stack_hci_extension_show')
+
+    with self.command_group('stack-hci galleryimage', stack_hci_galleryimage,
+                            client_factory=cf_galleryimage) as g:
+        g.custom_command('list', 'stack_hci_galleryimage_list')
+        g.custom_command('create', 'stack_hci_galleryimage_create')
+        g.custom_command('update', 'stack_hci_galleryimage_update')
+        g.custom_command('delete', 'stack_hci_galleryimage_delete', confirmation=True)
+        g.custom_command('show', 'stack_hci_galleryimage_show')      
+
+    with self.command_group('stack-hci networkinterface', stack_hci_networkinterface,
+                            client_factory=cf_networkinterface) as g:
+        g.custom_command('list', 'stack_hci_networkinterface_list')
+        g.custom_command('create', 'stack_hci_networkinterface_create')
+        g.custom_command('update', 'stack_hci_networkinterface_update')
+        g.custom_command('delete', 'stack_hci_networkinterface_delete', confirmation=True)
+        g.custom_command('show', 'stack_hci_networkinterface_show') 
+
+    with self.command_group('stack-hci virtualharddisk', stack_hci_virtualharddisk,
+                            client_factory=cf_virtualharddisk) as g:
+        g.custom_command('list', 'stack_hci_virtualharddisk_list')
+        g.custom_command('create', 'stack_hci_virtualharddisk_create')
+        g.custom_command('update', 'stack_hci_virtualharddisk_update')
+        g.custom_command('delete', 'stack_hci_virtualharddisk_delete', confirmation=True)
+        g.custom_command('show', 'stack_hci_virtualharddisk_show')  
+
+    with self.command_group('stack-hci virtualmachine', stack_hci_virtualmachine,
+                            client_factory=cf_virtualmachine) as g:
+        g.custom_command('list', 'stack_hci_virtualmachine_list')
+        g.custom_command('create', 'stack_hci_virtualmachine_create')
+        g.custom_command('update', 'stack_hci_virtualmachine_update')
+        g.custom_command('delete', 'stack_hci_virtualmachine_delete', confirmation=True)
+        g.custom_command('show', 'stack_hci_virtualmachine_show')
+        g.custom_command('start', 'stack_hci_virtualmachine_start')
+        g.custom_command('stop', 'stack_hci_virtualmachine_stop')
+        g.custom_command('restart', 'stack_hci_virtualmachine_restart')
+
+    with self.command_group('stack-hci virtualmachine vnic', stack_hci_virtualmachine,
+                            client_factory=cf_virtualmachine) as g:
+        g.custom_command('add', 'stack_hci_virtualmachine_vnic_add')
+        g.custom_command('remove', 'stack_hci_virtualmachine_vnic_remove', confirmation=True)
+
+    with self.command_group('stack-hci virtualnetwork', stack_hci_virtualnetwork,
+                            client_factory=cf_virtualnetwork) as g:
+        g.custom_command('list', 'stack_hci_virtualnetwork_list')
+        g.custom_command('create', 'stack_hci_virtualnetwork_create')
+        g.custom_command('update', 'stack_hci_virtualnetwork_update')
+        g.custom_command('delete', 'stack_hci_virtualnetwork_delete', confirmation=True)
+        g.custom_command('show', 'stack_hci_virtualnetwork_show')

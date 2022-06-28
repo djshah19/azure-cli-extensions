@@ -17,7 +17,7 @@
 import argparse
 from collections import defaultdict
 from knack.util import CLIError
-
+import json
 
 class AddDesiredProperties(argparse.Action):
     def __call__(self, parser, namespace, values, option_string=None):
@@ -50,3 +50,254 @@ class AddDesiredProperties(argparse.Action):
                 )
 
         return d
+
+class AddGalleryimagesExtendedLocation(argparse.Action):
+    def __call__(self, parser, namespace, values, option_string=None):
+        action = self.get_action(values, option_string)
+        namespace.extended_location = action
+
+    def get_action(self, values, option_string):  # pylint: disable=no-self-use
+        try:
+            properties = defaultdict(list)
+            for (k, v) in (x.split('=', 1) for x in values):
+                properties[k].append(v)
+            properties = dict(properties)
+        except ValueError:
+            raise CLIError('usage error: {} [KEY=VALUE ...]'.format(option_string))
+        d = {}
+        for k in properties:
+            kl = k.lower()
+            v = properties[k]
+            if kl == 'type':
+                d['type'] = v[0]
+            elif kl == 'name':
+                d['name'] = v[0]
+            else:
+                raise CLIError('Unsupported Key {} is provided for parameter extended_location. All possible keys are: '
+                               'type, name'.format(k))
+        return d
+
+class AddNetworkinterfacesExtendedLocation(argparse.Action):
+    def __call__(self, parser, namespace, values, option_string=None):
+        action = self.get_action(values, option_string)
+        namespace.extended_location = action
+
+    def get_action(self, values, option_string):  # pylint: disable=no-self-use
+        try:
+            properties = defaultdict(list)
+            for (k, v) in (x.split('=', 1) for x in values):
+                properties[k].append(v)
+            properties = dict(properties)
+        except ValueError:
+            raise CLIError('usage error: {} [KEY=VALUE ...]'.format(option_string))
+        d = {}
+        for k in properties:
+            kl = k.lower()
+            v = properties[k]
+            if kl == 'type':
+                d['type'] = v[0]
+            elif kl == 'name':
+                d['name'] = v[0]
+            else:
+                raise CLIError('Unsupported Key {} is provided for parameter extended_location. All possible keys are: '
+                               'type, name'.format(k))
+        return d
+
+class AddVirtualharddisksExtendedLocation(argparse.Action):
+    def __call__(self, parser, namespace, values, option_string=None):
+        action = self.get_action(values, option_string)
+        namespace.extended_location = action
+
+    def get_action(self, values, option_string):  # pylint: disable=no-self-use
+        try:
+            properties = defaultdict(list)
+            for (k, v) in (x.split('=', 1) for x in values):
+                properties[k].append(v)
+            properties = dict(properties)
+        except ValueError:
+            raise CLIError('usage error: {} [KEY=VALUE ...]'.format(option_string))
+        d = {}
+        for k in properties:
+            kl = k.lower()
+            v = properties[k]
+            if kl == 'type':
+                d['type'] = v[0]
+            elif kl == 'name':
+                d['name'] = v[0]
+            else:
+                raise CLIError('Unsupported Key {} is provided for parameter extended_location. All possible keys are: '
+                               'type, name'.format(k))
+        return d
+
+class AddVirtualmachinesExtendedLocation(argparse.Action):
+    def __call__(self, parser, namespace, values, option_string=None):
+        action = self.get_action(values, option_string)
+        namespace.extended_location = action
+
+    def get_action(self, values, option_string):  # pylint: disable=no-self-use
+        try:
+            properties = defaultdict(list)
+            for (k, v) in (x.split('=', 1) for x in values):
+                properties[k].append(v)
+            properties = dict(properties)
+        except ValueError:
+            raise CLIError('usage error: {} [KEY=VALUE ...]'.format(option_string))
+        d = {}
+        for k in properties:
+            kl = k.lower()
+            v = properties[k]
+            if kl == 'type':
+                d['type'] = v[0]
+            elif kl == 'name':
+                d['name'] = v[0]
+            else:
+                raise CLIError('Unsupported Key {} is provided for parameter extended_location. All possible keys are: '
+                               'type, name'.format(k))
+        return d
+
+class AddHardwareProfile(argparse.Action):
+    def __call__(self, parser, namespace, values, option_string=None):
+        action = self.get_action(values, option_string)
+        namespace.hardware_profile = action
+
+    def get_action(self, values, option_string):  # pylint: disable=no-self-use
+        try:
+            properties = defaultdict(list)
+            for (k, v) in (x.split('=', 1) for x in values):
+                properties[k].append(v)
+            properties = dict(properties)
+        except ValueError:
+            raise CLIError('usage error: {} [KEY=VALUE ...]'.format(option_string))
+        d = {}
+        dynamic_memory_config = {}
+        for k in properties:
+            kl = k.lower()
+            v = properties[k]
+            if kl == 'vm-size':
+                d['vm_size'] = v[0]
+            elif kl == 'processors':
+                d['processors'] = v[0]
+            elif kl == 'memory-gb':
+                d['memory_gb'] = v[0]
+            elif kl == 'maximum-memory-gb':
+                dynamic_memory_config['maximum_memory_gb'] = int(v[0])
+            elif kl == 'minimum-memory-gb':
+                dynamic_memory_config['minimum_memory_gb'] = int(v[0])
+            elif kl == 'target-memory-buffer':
+                dynamic_memory_config['target_memory_buffer'] = int(v[0])
+            else:
+                raise CLIError('Unsupported Key {} is provided for parameter hardware_profile. All possible keys are: '
+                               'vm-size, processors, memory-gb, maximum-memory-gb, minimum-memory-gb, target-memory-buffer'.format(k))
+        if dynamic_memory_config:
+            d['dynamic_memory_config'] = dynamic_memory_config
+        return d
+
+
+class AddNetworkProfile(argparse.Action):
+    def __call__(self, parser, namespace, values, option_string=None):
+        action = self.get_action(values, option_string)
+        namespace.network_profile = action
+
+    def get_action(self, values, option_string):  # pylint: disable=no-self-use
+        try:
+            properties = defaultdict(list)
+            for (k, v) in (x.split('=', 1) for x in values):
+                properties[k].append(v)
+            properties = dict(properties)
+        except ValueError:
+            raise CLIError('usage error: {} [KEY=VALUE ...]'.format(option_string))
+        d = {}
+        for k in properties:
+            kl = k.lower()
+            v = properties[k]
+            if kl == 'network-interfaces':
+                d['network_interfaces'] = v
+            else:
+                raise CLIError('Unsupported Key {} is provided for parameter network_profile. All possible keys are: '
+                               'network-interfaces'.format(k))
+        return d
+
+
+class AddSecurityProfile(argparse.Action):
+    def __call__(self, parser, namespace, values, option_string=None):
+        action = self.get_action(values, option_string)
+        namespace.security_profile = action
+
+    def get_action(self, values, option_string):  # pylint: disable=no-self-use
+        try:
+            properties = defaultdict(list)
+            for (k, v) in (x.split('=', 1) for x in values):
+                properties[k].append(v)
+            properties = dict(properties)
+        except ValueError:
+            raise CLIError('usage error: {} [KEY=VALUE ...]'.format(option_string))
+        d = {}
+        for k in properties:
+            kl = k.lower()
+            v = properties[k]
+            if kl == 'enable-tpm':
+                d['enable_tpm'] = v[0]
+            else:
+                raise CLIError('Unsupported Key {} is provided for parameter security_profile. All possible keys are: '
+                               'enable-tpm'.format(k))
+        return d
+
+
+class AddVirtualnetworksExtendedLocation(argparse.Action):
+    def __call__(self, parser, namespace, values, option_string=None):
+        action = self.get_action(values, option_string)
+        namespace.extended_location = action
+
+    def get_action(self, values, option_string):  # pylint: disable=no-self-use
+        try:
+            properties = defaultdict(list)
+            for (k, v) in (x.split('=', 1) for x in values):
+                properties[k].append(v)
+            properties = dict(properties)
+        except ValueError:
+            raise CLIError('usage error: {} [KEY=VALUE ...]'.format(option_string))
+        d = {}
+        for k in properties:
+            kl = k.lower()
+            v = properties[k]
+            if kl == 'type':
+                d['type'] = v[0]
+            elif kl == 'name':
+                d['name'] = v[0]
+            else:
+                raise CLIError('Unsupported Key {} is provided for parameter extended_location. All possible keys are: '
+                               'type, name'.format(k))
+        return d
+
+class AddLinuxConfiguration(argparse.Action):
+    def __call__(self, parser, namespace, values, option_string=None):
+        action = self.get_action(values, option_string)
+        if action:
+            if hasattr(namespace, 'os_profile'):
+                if namespace.os_profile is None:
+                    namespace.os_profile = {'linux_configuration': action}
+                else:
+                    namespace.os_profile['linux_configuration'] = action
+            else:
+                namespace.os_profile = {'linux_configuration': action}
+
+    def get_action(self, values, option_string):  # pylint: disable=no-self-use
+        try:
+            properties = defaultdict(list)
+            for (k, v) in (x.split('=', 1) for x in values):
+                properties[k].append(v)
+            properties = dict(properties)
+        except ValueError:
+            raise CLIError('usage error: {} [KEY=VALUE ...]'.format(option_string))
+        ssh_data = [] 
+        for k in properties:
+            kl = k.lower()
+            v = properties[k]
+            if kl == 'ssh_keys':
+                ssh_data.extend(json.loads(i) for i in v)
+            else:
+                raise CLIError('Unsupported Key {} is provided for parameter linux_configuration. All possible keys are: '
+                               'ssh_data'.format(k))
+        if ssh_data:
+            return {'ssh': {'public_keys': ssh_data}}
+        return {}

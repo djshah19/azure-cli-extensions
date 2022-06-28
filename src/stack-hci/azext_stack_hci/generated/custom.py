@@ -303,3 +303,367 @@ def stack_hci_extension_delete(client,
                        cluster_name=cluster_name,
                        arc_setting_name=arc_setting_name,
                        extension_name=extension_name)
+
+
+def stack_hci_galleryimage_list(client,
+                                    resource_group_name=None):
+    if resource_group_name:
+        return client.list_by_resource_group(resource_group_name=resource_group_name)
+    return client.list_by_subscription()
+
+def stack_hci_galleryimage_create(client,
+                                      resource_group_name,
+                                      name,
+                                      location,
+                                      tags=None,
+                                      extended_location=None,
+                                      container_name=None,
+                                      image_path=None,
+                                      os_type=None,
+                                      provisioning_state=None,
+                                      status=None):
+    galleryimages = {}
+    galleryimages['location'] = location
+    galleryimages['tags'] = tags
+    galleryimages['extended_location'] = extended_location
+    galleryimages['properties'] = {}
+    galleryimages['properties']['container_name'] = container_name
+    galleryimages['properties']['image_path'] = image_path
+    galleryimages['properties']['os_type'] = os_type
+    galleryimages['properties']['provisioning_state'] = provisioning_state
+    galleryimages['properties']['status'] = status
+    return client.create_or_update(resource_group_name=resource_group_name,
+                                         galleryimages_name=name,
+                                         galleryimages=galleryimages)
+
+
+def stack_hci_galleryimage_update(client,
+                                      resource_group_name,
+                                      name,
+                                      tags=None):
+    galleryimages = {}
+    galleryimages['tags'] = tags
+    return client.update(resource_group_name=resource_group_name,
+                         galleryimages_name=name,
+                         galleryimages=galleryimages)
+
+
+def stack_hci_galleryimage_delete(client,
+                                      resource_group_name,
+                                      name):
+    return client.delete(resource_group_name=resource_group_name,
+                         galleryimages_name=name)
+
+
+def stack_hci_galleryimage_show(client,
+                                        resource_group_name,
+                                        name):
+    return client.retrieve(resource_group_name=resource_group_name,
+                           galleryimages_name=name)
+
+
+def stack_hci_networkinterface_list(client,
+                                        resource_group_name=None):
+    if resource_group_name:
+        return client.list_by_resource_group(resource_group_name=resource_group_name)
+    return client.list_by_subscription()
+
+
+def stack_hci_networkinterface_create(client,
+                                          resource_group_name,
+                                          name,
+                                          location,
+                                          tags=None,
+                                          extended_location=None,
+                                          ip_configurations=None,
+                                          mac_address=None,
+                                          provisioning_state=None,
+                                          status=None,
+                                          subnet_id=None):
+    networkinterfaces = {}
+    networkinterfaces['location'] = location
+    networkinterfaces['tags'] = tags
+    networkinterfaces['extended_location'] = extended_location
+    networkinterfaces['properties'] = {}
+    networkinterfaces['properties']['ip_configurations'] = ip_configurations or list()
+    networkinterfaces['properties']['mac_address'] = mac_address
+    networkinterfaces['properties']['provisioning_state'] = provisioning_state
+    networkinterfaces['properties']['status'] = status
+    if subnet_id is not None:
+        networkinterfaces['properties']['ip_configurations'].append({"name": "", "properties": {"subnet": {"id": subnet_id}}})
+    return client.create_or_update(resource_group_name=resource_group_name,
+                                         networkinterfaces_name=name,
+                                         networkinterfaces=networkinterfaces)
+
+
+def stack_hci_networkinterface_update(client,
+                                          resource_group_name,
+                                          name,
+                                          tags=None):
+    networkinterfaces = {}
+    networkinterfaces['tags'] = tags
+    return client.update(resource_group_name=resource_group_name,
+                         networkinterfaces_name=name,
+                         networkinterfaces=networkinterfaces)
+
+
+def stack_hci_networkinterface_delete(client,
+                                          resource_group_name,
+                                          name):
+    return client.delete(resource_group_name=resource_group_name,
+                         networkinterfaces_name=name)
+
+
+def stack_hci_networkinterface_show(client,
+                                            resource_group_name,
+                                            name):
+    return client.retrieve(resource_group_name=resource_group_name,
+                           networkinterfaces_name=name)
+
+
+def stack_hci_virtualharddisk_list(client,
+                                       resource_group_name=None):
+    if resource_group_name:
+        return client.list_by_resource_group(resource_group_name=resource_group_name)
+    return client.list_by_subscription()
+
+
+def stack_hci_virtualharddisk_create(client,
+                                         resource_group_name,
+                                         name,
+                                         location,
+                                         tags=None,
+                                         extended_location=None,
+                                         block_size_bytes=None,
+                                         disk_size_bytes=None,
+                                         dynamic=None,
+                                         logical_sector_bytes=None,
+                                         physical_sector_bytes=None,
+                                         provisioning_state=None,
+                                         status=None):
+    virtualharddisks = {}
+    virtualharddisks['location'] = location
+    virtualharddisks['tags'] = tags
+    virtualharddisks['extended_location'] = extended_location
+    virtualharddisks['properties'] = {}
+    virtualharddisks['properties']['block_size_bytes'] = block_size_bytes
+    virtualharddisks['properties']['disk_size_bytes'] = disk_size_bytes
+    virtualharddisks['properties']['dynamic'] = dynamic
+    virtualharddisks['properties']['logical_sector_bytes'] = logical_sector_bytes
+    virtualharddisks['properties']['physical_sector_bytes'] = physical_sector_bytes
+    virtualharddisks['properties']['provisioning_state'] = provisioning_state
+    virtualharddisks['properties']['status'] = status
+    return client.create_or_update(resource_group_name=resource_group_name,
+                                         virtualharddisks_name=name,
+                                         virtualharddisks=virtualharddisks)
+
+
+def stack_hci_virtualharddisk_update(client,
+                                         resource_group_name,
+                                         name,
+                                         tags=None):
+    virtualharddisks = {}
+    virtualharddisks['tags'] = tags
+    return client.update(resource_group_name=resource_group_name,
+                         virtualharddisks_name=name,
+                         virtualharddisks=virtualharddisks)
+
+
+def stack_hci_virtualharddisk_delete(client,
+                                         resource_group_name,
+                                         name):
+    return client.delete(resource_group_name=resource_group_name,
+                         virtualharddisks_name=name)
+
+
+def stack_hci_virtualharddisk_show(client,
+                                           resource_group_name,
+                                           name):
+    return client.retrieve(resource_group_name=resource_group_name,
+                           virtualharddisks_name=name)
+
+
+def stack_hci_virtualmachine_list(client,
+                                      resource_group_name=None):
+    if resource_group_name:
+        return client.list_by_resource_group(resource_group_name=resource_group_name)
+    return client.list_by_subscription()
+
+
+def stack_hci_virtualmachine_create(client,
+                                        resource_group_name,
+                                        name,
+                                        location,
+                                        tags=None,
+                                        extended_location=None,
+                                        hardware_profile=None,
+                                        image_reference=None,
+                                        network_profile=None,
+                                        nic_id=None,
+                                        os_profile=None,
+                                        security_profile=None,
+                                        storage_profile=None,
+                                        linux_configuration=None,
+                                        windows_configuration=None,
+                                        provisioning_state=None,
+                                        status=None,
+                                        vm_size=None):
+    virtualmachines = {}
+    virtualmachines['location'] = location
+    virtualmachines['tags'] = tags
+    virtualmachines['extended_location'] = extended_location
+    virtualmachines['properties'] = {}
+    virtualmachines['properties']['hardware_profile'] = hardware_profile
+    virtualmachines['properties']['network_profile'] = network_profile
+    virtualmachines['properties']['os_profile'] = os_profile
+    virtualmachines['properties']['security_profile'] = security_profile
+    virtualmachines['properties']['storage_profile'] = storage_profile
+    virtualmachines['properties']['linux_configuration'] = linux_configuration
+    virtualmachines['properties']['windows_configuration'] = windows_configuration
+    virtualmachines['properties']['provisioning_state'] = provisioning_state
+    virtualmachines['properties']['status'] = status
+
+    # Overriden Variables
+    virtualmachines['properties']['storage_profile'] = {'image_reference': {'name': image_reference}}
+    if nic_id is not None:
+        virtualmachines['properties']['network_profile'] = {'network_interfaces': [{'id' : nic_id}]}
+    virtualmachines['properties']['hardware_profile'] = {'vm_size' : vm_size}
+
+    return client.create_or_update(resource_group_name=resource_group_name,
+                                         virtualmachines_name=name,
+                                         virtualmachines=virtualmachines)
+
+
+def stack_hci_virtualmachine_update(client,
+                                        resource_group_name,
+                                        name,
+                                        tags=None,
+                                        cpu_count=None,
+                                        memory_gb=None,
+                                        vnic_names=None,
+                                        vhd_names=None):
+    virtualmachine_properties = {}
+    if cpu_count is not None or memory_gb is not None:
+        virtualmachine_properties['hardware_profile'] = {}
+        if cpu_count is not None:
+            virtualmachine_properties['hardware_profile']['processors'] = cpu_count
+        if memory_gb is not None:
+            virtualmachine_properties['hardware_profile']['memory_gb'] = memory_gb
+    
+    if vnic_names is not None:
+        virtualmachine_properties['network_profile'] = { 'network_interfaces' : [] }
+        for vnic_name in vnic_names:
+            virtualmachine_properties['network_profile']['network_interfaces'].append({'id': vnic_name})
+    
+    if vhd_names is not None:
+        virtualmachine_properties['storage_profile'] = {'data_disks':  [] }
+        for vhd_name in vhd_names:
+            virtualmachine_properties['storage_profile']['data_disks'].append({'name': vhd_name})
+
+    return client.update(resource_group_name=resource_group_name,
+                         virtualmachines_name=name,
+                         properties=virtualmachine_properties,
+                         tags=tags)
+
+
+def stack_hci_virtualmachine_delete(client,
+                                        resource_group_name,
+                                        name):
+    return client.delete(resource_group_name=resource_group_name,
+                         virtualmachines_name=name)
+
+
+def stack_hci_virtualmachine_show(client,
+                                          resource_group_name,
+                                          name):
+    return client.retrieve(resource_group_name=resource_group_name,
+                           virtualmachines_name=name)
+
+
+def stack_hci_virtualmachine_start(client,
+                                       resource_group_name,
+                                       name):
+    return client.start(resource_group_name=resource_group_name,
+                        virtualmachines_name=name)
+
+
+def stack_hci_virtualmachine_stop(client,
+                                      resource_group_name,
+                                      name):
+    return client.stop(resource_group_name=resource_group_name,
+                       virtualmachines_name=name)
+
+def stack_hci_virtualmachine_restart(client,
+                                      resource_group_name,
+                                      name):
+    return client.restart(resource_group_name=resource_group_name,
+                       virtualmachines_name=name)
+
+def stack_hci_virtualmachine_vnic_add(client,
+                                      resource_group_name,
+                                      name,
+                                      vnic_names):
+    return client.add_vnic(resource_group_name=resource_group_name,
+                       virtualmachines_name=name, vnic_names=vnic_names)
+
+def stack_hci_virtualmachine_vnic_remove(client,
+                                      resource_group_name,
+                                      name,
+                                      vnic_names):
+    return client.remove_vnic(resource_group_name=resource_group_name,
+                       virtualmachines_name=name, vnic_names=vnic_names)
+
+def stack_hci_virtualnetwork_list(client,
+                                      resource_group_name=None):
+    if resource_group_name:
+        return client.list_by_resource_group(resource_group_name=resource_group_name)
+    return client.list_by_subscription()
+
+
+def stack_hci_virtualnetwork_create(client,
+                                        resource_group_name,
+                                        name,
+                                        location,
+                                        tags=None,
+                                        extended_location=None,
+                                        network_type=None,
+                                        subnets=None,
+                                        provisioning_state=None,
+                                        status=None):
+    virtualnetworks = {}
+    virtualnetworks['location'] = location
+    virtualnetworks['tags'] = tags
+    virtualnetworks['extended_location'] = extended_location
+    virtualnetworks['properties'] = {}
+    virtualnetworks['properties']['network_type'] = network_type
+    virtualnetworks['properties']['subnets'] = subnets
+    virtualnetworks['properties']['provisioning_state'] = provisioning_state
+    virtualnetworks['properties']['status'] = status
+    return client.create_or_update(resource_group_name=resource_group_name,
+                                         virtualnetworks_name=name,
+                                         virtualnetworks=virtualnetworks)
+
+
+def stack_hci_virtualnetwork_update(client,
+                                        resource_group_name,
+                                        name,
+                                        tags=None):
+    virtualnetworks = {}
+    virtualnetworks['tags'] = tags
+    return client.update(resource_group_name=resource_group_name,
+                         virtualnetworks_name=name,
+                         virtualnetworks=virtualnetworks)
+
+
+def stack_hci_virtualnetwork_delete(client,
+                                        resource_group_name,
+                                        name):
+    return client.delete(resource_group_name=resource_group_name,
+                         virtualnetworks_name=name)
+
+
+def stack_hci_virtualnetwork_show(client,
+                                          resource_group_name,
+                                          name):
+    return client.retrieve(resource_group_name=resource_group_name,
+                           virtualnetworks_name=name)

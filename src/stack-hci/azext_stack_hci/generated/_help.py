@@ -205,3 +205,414 @@ helps['stack-hci extension wait'] = """
                az stack-hci extension wait --arc-setting-name "default" --cluster-name "myCluster" --name \
 "MicrosoftMonitoringAgent" --resource-group "test-rg" --deleted
 """
+
+helps['stack-hci galleryimage'] = """
+    type: group
+    short-summary: Manage galleryimage with stack hci
+"""
+
+helps['stack-hci galleryimage list'] = """
+    type: command
+    short-summary: "List all gallery images"
+    examples:
+      - name: ListGalleryImageByResourceGroup
+        text: |-
+               az stack-hci galleryimage list --resource-group "test-rg"
+      - name: ListGalleryImageByResourceGroup
+        text: |-
+               az stack-hci galleryimage list
+"""
+
+helps['stack-hci galleryimage create'] = """
+    type: command
+    short-summary: "Create a gallery image"
+    parameters:
+      - name: --extended-location
+        long-summary: |
+            Usage: --extended-location type=XX name=XX
+
+            type: The extended location type.
+            name: The extended location name.
+    examples:
+      - name: PutGalleryImage
+        text: |-
+               az stack-hci galleryimage create --extended-location name="/subscriptions/a95612cb-f1fa-4daa-a4fd-27\
+2844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.ExtendedLocation/customLocations/dogfood-location" \
+type="CustomLocation" --location "West US2" --container-name "Default_Container" --image-path "C:\\\\test.vhdx" \
+--name "test-gallery-image" --resource-group "test-rg"
+"""
+
+helps['stack-hci galleryimage update'] = """
+    type: command
+    short-summary: "Update a gallery image."
+    examples:
+      - name: UpdateGalleryImage
+        text: |-
+               az stack-hci galleryimage update --tags additionalProperties="sample" --name \
+"test-gallery-image" --resource-group "test-rg"
+"""
+
+helps['stack-hci galleryimage delete'] = """
+    type: command
+    short-summary: "Delete a  gallery image."
+    examples:
+      - name: DeleteGalleryImage
+        text: |-
+               az stack-hci galleryimage delete --name "test-gallery-image" --resource-group \
+"test-rg"
+"""
+
+helps['stack-hci galleryimage show'] = """
+    type: command
+    short-summary: "Get the details of a gallery image"
+    examples:
+      - name: GetGalleryImage
+        text: |-
+               az stack-hci galleryimage show --name "test-gallery-image" --resource-group \
+"test-rg"
+"""
+
+helps['stack-hci networkinterface'] = """
+    type: group
+    short-summary: Manage networkinterface with stack hci
+"""
+
+helps['stack-hci networkinterface list'] = """
+    type: command
+    short-summary: "List all network interfaces"
+    examples:
+      - name: ListNetworkInterfaceByResourceGroup
+        text: |-
+               az stack-hci networkinterface list --resource-group "test-rg"
+      - name: ListNetworkInterfaceBySubscription
+        text: |-
+               az stack-hci networkinterface list
+"""
+
+helps['stack-hci networkinterface create'] = """
+    type: command
+    short-summary: "Create a network interface"
+    parameters:
+      - name: --extended-location
+        long-summary: |
+            Usage: --extended-location type=XX name=XX
+
+            type: The extended location type.
+            name: The extended location name.
+    examples:
+      - name: PutNetworkInterface
+        text: |-
+               az stack-hci networkinterface create --extended-location name="/subscriptions/a95612cb-f1fa-4daa-a4f\
+d-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.ExtendedLocation/customLocations/dogfood-location" \
+type="CustomLocation" --location "West US2" --ip-configurations "[{\\"name\\":\\"ipconfig-sample\\",\\"properties\\":{\
+\\"subnet\\":{\\"id\\":\\"test-vnet\\"}}}]" --name "test-nic" --resource-group "test-rg"
+"""
+
+helps['stack-hci networkinterface update'] = """
+    type: command
+    short-summary: "Update a network interface."
+    examples:
+      - name: UpdateNetworkInterface
+        text: |-
+               az stack-hci networkinterface update --tags additionalProperties="sample" --name \
+"test-nic" --resource-group "test-rg"
+"""
+
+helps['stack-hci networkinterface delete'] = """
+    type: command
+    short-summary: "Delete a network interface"
+    examples:
+      - name: DeleteNetworkInterface
+        text: |-
+               az stack-hci networkinterface delete --name "test-nic" --resource-group "test-rg"
+"""
+
+helps['stack-hci networkinterface show'] = """
+    type: command
+    short-summary: "Get the details of a network interface"
+    examples:
+      - name: GetNetworkInterface
+        text: |-
+               az stack-hci networkinterface show --name "test-nic" --resource-group \
+"test-rg"
+"""
+
+helps['stack-hci virtualharddisk'] = """
+    type: group
+    short-summary: Manage virtualharddisk with stack hci
+"""
+
+helps['stack-hci virtualharddisk list'] = """
+    type: command
+    short-summary: "List all virtual hard disks"
+    examples:
+      - name: ListVirtualHardDiskByResourceGroup
+        text: |-
+               az stack-hci virtualharddisk list --resource-group "test-rg"
+      - name: ListVirtualHardDiskByResourceGroup
+        text: |-
+               az stack-hci virtualharddisk list
+"""
+
+helps['stack-hci virtualharddisk create'] = """
+    type: command
+    short-summary: "Create a virtual hard disk"
+    parameters:
+      - name: --extended-location
+        long-summary: |
+            Usage: --extended-location type=XX name=XX
+
+            type: The extended location type.
+            name: The extended location name.
+    examples:
+      - name: PutVirtualHardDisk
+        text: |-
+               az stack-hci virtualharddisk create --resource-group "test-rg" --extended-location \
+name="/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.ExtendedLocatio\
+n/customLocations/dogfood-location" type="CustomLocation" --location "West US2" --disk-size-bytes 32 \
+--name "test-vhd"
+"""
+
+helps['stack-hci virtualharddisk update'] = """
+    type: command
+    short-summary: "Update a virtual hard disk"
+    examples:
+      - name: UpdateVirtualHardDisk
+        text: |-
+               az stack-hci virtualharddisk update --resource-group "test-rg" --tags additionalProperties="sample" \
+--name "test-vhd"
+"""
+
+helps['stack-hci virtualharddisk delete'] = """
+    type: command
+    short-summary: "Delete a virtual hard disk"
+    examples:
+      - name: DeleteVirtualHardDisk
+        text: |-
+               az stack-hci virtualharddisk delete --resource-group "test-rg" --name "test-vhd"
+"""
+
+helps['stack-hci virtualharddisk show'] = """
+    type: command
+    short-summary: "Get the details of a virtual hard disk"
+    examples:
+      - name: GetVirtualHardDisk
+        text: |-
+               az stack-hci virtualharddisk show --resource-group "test-rg" --name "test-vhd"
+"""
+
+helps['stack-hci virtualmachine'] = """
+    type: group
+    short-summary: Manage virtualmachine with stack hci
+"""
+
+helps['stack-hci virtualmachine list'] = """
+    type: command
+    short-summary: "List all the VMs"
+    examples:
+      - name: ListVirtualMachineByResourceGroup
+        text: |-
+               az stack-hci virtualmachine list --resource-group "test-rg"
+      - name: ListVirtualMachineBySubscription
+        text: |-
+               az stack-hci virtualmachine list
+"""
+
+helps['stack-hci virtualmachine create'] = """
+    type: command
+    short-summary: "Create a VM"
+    parameters:
+      - name: --extended-location
+        long-summary: |
+            Usage: --extended-location type=XX name=XX
+
+            type: The extended location type.
+            name: The extended location name.
+      - name: --hardware-profile
+        short-summary: "HardwareProfile - Specifies the hardware settings for the virtual machine."
+        long-summary: |
+            Usage: --hardware-profile vm-size=XX processors=XX memory-gb=XX maximum-memory-gb=XX minimum-memory-gb=XX target-memory-buffer=XX
+
+            processors: number of processors for the virtual machine
+            memory-gb: RAM in gb for the virtual machine
+            maximum-memory-gb: Maximum dynamic memory in gb
+            minimum-memory-gb: Minimum dynamic memory in gb
+            target-memory-buffer: Target memory buffer
+      - name: --network-profile
+        short-summary: "NetworkProfile - describes the network configuration the virtual machine"
+        long-summary: |
+            Usage: --network-profile network-interfaces=XX
+
+            network-interfaces: NetworkInterfaces - list of network interfaces to be attached to the virtual machine
+      - name: --security-profile
+        short-summary: "SecurityProfile - Specifies the security settings for the virtual machine."
+        long-summary: |
+            Usage: --security-profile enable-tpm=XX
+      - name: --linux-configuration
+        short-summary: "LinuxConfiguration - Specifies the security settings for the virtual machine."
+        long-summary: |
+            Usage: --linux-configuration enable-tpm=XX
+      - name: --windows-configuration
+        short-summary: "WindowsConfiguration - Windows Configuration for the virtual machine. "
+
+    examples:
+      - name: PutVirtualMachine
+        text: |-
+               az stack-hci virtualmachine create --resource-group "test-rg" --extended-location \
+name="/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.ExtendedLocatio\
+n/customLocations/dogfood-location" type="CustomLocation" --location "West US2" --hardware-profile vm-size="Default" \
+--network-profile network-interfaces={"id":"test-nic"} --os-profile "{\\"adminPassword\\":\\"password\\",\\"adminUserna\
+me\\":\\"localadmin\\",\\"computerName\\":\\"luamaster\\"}" --storage-profile "{\\"imageReference\\":{\\"name\\":\\"tes\
+t-gallery-image\\"}}" --name "test-vm"
+"""
+
+helps['stack-hci virtualmachine update'] = """
+    type: command
+    short-summary: "Update a VM"
+    parameters:
+      - name: --cpu-count
+        short-summary: "Number of processors"
+      - name: --memory-gb
+        short-summary: "Amount of RAM in gb"
+      - name: --vhd-names
+        short-summary: "List of vhd names"
+      - name: --vnic-names
+        short-summary: "List of vnic names"
+    examples:
+      - name: UpdateVirtualMachine
+        text: |-
+               az stack-hci virtualmachine update --resource-group "test-rg" --tags additionalProperties="sample" \
+--name "test-vm" --cpu-count XX --memory-gb XX --vhd-names vhd1 vhd2 --vnic-names vnic1 vnic2
+"""
+
+helps['stack-hci virtualmachine delete'] = """
+    type: command
+    short-summary: "Delete a VM"
+    examples:
+      - name: DeleteVirtualMachine
+        text: |-
+               az stack-hci virtualmachine delete --resource-group "test-rg" --name "test-vm"
+"""
+
+helps['stack-hci virtualmachine show'] = """
+    type: command
+    short-summary: "Get the details of a VM"
+    examples:
+      - name: GetVirtualMachine
+        text: |-
+               az stack-hci virtualmachine show --resource-group "test-rg" --name "test-vm"
+"""
+
+helps['stack-hci virtualmachine start'] = """
+    type: command
+    short-summary: "Start a stopped VM"
+    examples:
+      - name: StartVirtualMachine
+        text: |-
+               az stack-hci virtualmachine start --resource-group "test-rg" --name "test-vm"
+"""
+
+helps['stack-hci virtualmachine stop'] = """
+    type: command
+    short-summary: "Power off (stop) a running VM"
+    examples:
+      - name: StopVirtualMachine
+        text: |-
+               az stack-hci virtualmachine stop --resource-group "test-rg" --name "test-vm"
+"""
+
+helps['stack-hci virtualmachine restart'] = """
+    type: command
+    short-summary: "Restart a VM"
+    examples:
+      - name: RestartVirtualMachine
+        text: |-
+               az stack-hci virtualmachine restart --resource-group "test-rg" --name "test-vm"
+"""
+
+helps['stack-hci virtualmachine vnic'] = """
+    type: group
+    short-summary: Manage vNIC of a virtual machine with stack hci
+"""
+
+helps['stack-hci virtualmachine vnic add'] = """
+    type: command
+    short-summary: "Add existing vNICs to a VM"
+    examples:
+      - name: AddVNIC
+        text: |-
+               az stack-hci virtualmachine vnic add --resource-group "test-rg" --name "test-vm" --vnic-names "test-vnic"
+"""
+
+helps['stack-hci virtualmachine vnic remove'] = """
+    type: command
+    short-summary: "Remove vNICs from a VM"
+    examples:
+      - name: RemoveVNIC
+        text: |-
+               az stack-hci virtualmachine vnic remove --resource-group "test-rg" --name "test-vm" --vnic-names "test-vnic"
+"""
+
+helps['stack-hci virtualnetwork'] = """
+    type: group
+    short-summary: Manage virtualnetwork with stack hci
+"""
+
+helps['stack-hci virtualnetwork list'] = """
+    type: command
+    short-summary: "List all the virtual networks"
+    examples:
+      - name: ListVirtualNetworkByResourceGroup
+        text: |-
+               az stack-hci virtualnetwork list --resource-group "test-rg"
+      - name: ListVirtualNetworkBySubscription
+        text: |-
+               az stack-hci virtualnetwork list
+"""
+
+helps['stack-hci virtualnetwork create'] = """
+    type: command
+    short-summary: "Create a virtual network"
+    parameters:
+      - name: --extended-location
+        long-summary: |
+            Usage: --extended-location type=XX name=XX
+
+            type: The extended location type.
+            name: The extended location name.
+    examples:
+      - name: PutVirtualNetwork
+        text: |-
+               az stack-hci virtualnetwork create --resource-group "test-rg" --extended-location \
+name="/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.ExtendedLocatio\
+n/customLocations/dogfood-location" type="CustomLocation" --location "West US2" --network-type "Transparent" \
+--name "test-vnet"
+"""
+
+helps['stack-hci virtualnetwork update'] = """
+    type: command
+    short-summary: "Update a virtual network"
+    examples:
+      - name: UpdateVirtualNetwork
+        text: |-
+               az stack-hci virtualnetwork update --resource-group "test-rg" --tags additionalProperties="sample" \
+--name "test-vnet"
+"""
+
+helps['stack-hci virtualnetwork delete'] = """
+    type: command
+    short-summary: "Delete a virtual network"
+    examples:
+      - name: DeleteVirtualNetwork
+        text: |-
+               az stack-hci virtualnetwork delete --resource-group "test-rg" --name "test-vnet"
+"""
+
+helps['stack-hci virtualnetwork show'] = """
+    type: command
+    short-summary: "Get the details of a virtual network"
+    examples:
+      - name: GetVirtualNetwork
+        text: |-
+               az stack-hci virtualnetwork show --resource-group "test-rg" --name "test-vnet"
+"""

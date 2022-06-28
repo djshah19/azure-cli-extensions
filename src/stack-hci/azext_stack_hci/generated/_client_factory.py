@@ -26,3 +26,23 @@ def cf_cluster(cli_ctx, *_):
 
 def cf_extension(cli_ctx, *_):
     return cf_stack_hci_cl(cli_ctx).extensions
+    
+
+def cf_galleryimage(cli_ctx, *_):
+    return cf_stack_hci_cl(cli_ctx).galleryimages
+
+
+def cf_networkinterface(cli_ctx, *_):
+    return cf_stack_hci_cl(cli_ctx).networkinterfaces
+
+
+def cf_virtualharddisk(cli_ctx, *_):
+    return cf_stack_hci_cl(cli_ctx).virtualharddisks
+
+
+def cf_virtualmachine(cli_ctx, *_):
+    return cf_stack_hci_cl(cli_ctx).virtualmachines
+
+
+def cf_virtualnetwork(cli_ctx, *_):
+    return cf_stack_hci_cl(cli_ctx).virtualnetworks    

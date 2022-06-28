@@ -21,7 +21,18 @@ from azure.cli.core.commands.validators import (
     get_default_location_from_resource_group,
     validate_file_or_dict
 )
-from azext_stack_hci.action import AddDesiredProperties
+from azext_stack_hci.action import (
+    AddDesiredProperties,
+    AddGalleryimagesExtendedLocation,
+    AddNetworkinterfacesExtendedLocation,
+    AddVirtualharddisksExtendedLocation,
+    AddVirtualmachinesExtendedLocation,
+    AddHardwareProfile,
+    AddNetworkProfile,
+    AddSecurityProfile,
+    AddVirtualnetworksExtendedLocation,
+    AddLinuxConfiguration
+)
 
 
 def load_arguments(self, _):
@@ -212,3 +223,201 @@ def load_arguments(self, _):
                    'ArcSetting information.', id_part='child_name_1')
         c.argument('extension_name', options_list=['--name', '-n', '--extension-name'], type=str, help='The name of '
                    'the machine extension.', id_part='child_name_2')
+
+    with self.argument_context('stack-hci galleryimage list') as c:
+        c.argument('resource_group_name', resource_group_name_type)
+
+    with self.argument_context('stack-hci galleryimage create') as c:
+        c.argument('resource_group_name', resource_group_name_type)
+        c.argument('name', type=str, help='Name of the gallery image')
+        c.argument('location', arg_type=get_location_type(self.cli_ctx), required=False,
+                   validator=get_default_location_from_resource_group)
+        c.argument('tags', tags_type)
+        c.argument('extended_location', action=AddGalleryimagesExtendedLocation, nargs='+', help='')
+        c.argument('container_name', type=str, help='Container Name for storage container')
+        c.argument('image_path', type=str, help='location of the image the gallery image should be created from')
+        c.argument('os_type', type=str, help='operating system type of the image')
+        c.argument('provisioning_state', type=str, help='Provisioning state')
+        c.argument('os_type', type=str, help='OS Type [Windows, Linux]')
+        c.argument('status', type=validate_file_or_dict, help='MOCGalleryImageStatus defines the observed state of '
+                   'MOCGalleryImage Expected value: json-string/@json-file.')
+
+    with self.argument_context('stack-hci galleryimage update') as c:
+        c.argument('resource_group_name', resource_group_name_type)
+        c.argument('name', type=str, help='Name of the gallery image', id_part='name')
+        c.argument('tags', tags_type)
+
+    with self.argument_context('stack-hci galleryimage delete') as c:
+        c.argument('resource_group_name', resource_group_name_type)
+        c.argument('name', type=str, help='Name of the gallery image', id_part='name')
+
+    with self.argument_context('stack-hci galleryimage show') as c:
+        c.argument('resource_group_name', resource_group_name_type)
+        c.argument('name', type=str, help='Name of the gallery image', id_part='name')
+
+    with self.argument_context('stack-hci networkinterface list') as c:
+        c.argument('resource_group_name', resource_group_name_type)
+
+    with self.argument_context('stack-hci networkinterface create') as c:
+        c.argument('resource_group_name', resource_group_name_type)
+        c.argument('name', type=str, help='Name of the network interface')
+        c.argument('location', arg_type=get_location_type(self.cli_ctx), required=False,
+                   validator=get_default_location_from_resource_group)
+        c.argument('tags', tags_type)
+        c.argument('extended_location', action=AddNetworkinterfacesExtendedLocation, nargs='+', help='')
+        c.argument('ip_configurations', type=validate_file_or_dict, help='IPConfigurations - A list of '
+                   'IPConfigurations of the network interface. Expected value: json-string/@json-file.')
+        c.argument('mac_address', type=str, help='MacAddress - The MAC address of the network interface.')
+        c.argument('provisioning_state', type=str, help='Provisioning State')
+        c.argument('status', type=validate_file_or_dict, help='MOCNetworkInterfaceStatus defines the observed state of '
+                   'MOCNetworkInterface Expected value: json-string/@json-file.')
+        c.argument('subnet_id', type=str, help='ID of the subnet or network to create the network interface on')
+
+    with self.argument_context('stack-hci networkinterface update') as c:
+        c.argument('resource_group_name', resource_group_name_type)
+        c.argument('name', type=str, help='Name of the network interface', id_part='name')
+        c.argument('tags', tags_type)
+
+    with self.argument_context('stack-hci networkinterface delete') as c:
+        c.argument('resource_group_name', resource_group_name_type)
+        c.argument('name', type=str, help='Name of the network interface', id_part='name')
+
+    with self.argument_context('stack-hci networkinterface show') as c:
+        c.argument('resource_group_name', resource_group_name_type)
+        c.argument('name', type=str, help='Name of the network interface', id_part='name')
+
+    with self.argument_context('stack-hci virtualharddisk list') as c:
+        c.argument('resource_group_name', resource_group_name_type)
+
+    with self.argument_context('stack-hci virtualharddisk create') as c:
+        c.argument('resource_group_name', resource_group_name_type)
+        c.argument('name', type=str, help='Name of the virtual hard disk')
+        c.argument('location', arg_type=get_location_type(self.cli_ctx), required=False,
+                   validator=get_default_location_from_resource_group)
+        c.argument('tags', tags_type)
+        c.argument('extended_location', action=AddVirtualharddisksExtendedLocation, nargs='+', help='')
+        c.argument('block_size_bytes', type=int, help='Block size')
+        c.argument('disk_size_bytes', type=int, help='diskSizeBytes - size of the disk in GB')
+        c.argument('dynamic', arg_type=get_three_state_flag(), help='Boolean for enabling dynamic sizing on the '
+                   'virtual hard disk')
+        c.argument('logical_sector_bytes', type=int, help='Logical Sector')
+        c.argument('physical_sector_bytes', type=int, help='Physical Sector')
+        c.argument('provisioning_state', type=str, help='Provisioning State')
+        c.argument('status', type=validate_file_or_dict, help='MOCVirtualHardDiskStatus defines the observed state of '
+                   'MOCVirtualHardDisk Expected value: json-string/@json-file.')
+
+    with self.argument_context('stack-hci virtualharddisk update') as c:
+        c.argument('resource_group_name', resource_group_name_type)
+        c.argument('name', type=str, help='Name of the virtual hard disk', id_part='name')
+        c.argument('tags', tags_type)
+
+    with self.argument_context('stack-hci virtualharddisk delete') as c:
+        c.argument('resource_group_name', resource_group_name_type)
+        c.argument('name', type=str, help='Name of the virtual hard disk', id_part='name')
+
+    with self.argument_context('stack-hci virtualharddisk show') as c:
+        c.argument('resource_group_name', resource_group_name_type)
+        c.argument('name', type=str, help='Name of the virtual hard disk', id_part='name')
+
+    with self.argument_context('stack-hci virtualmachine list') as c:
+        c.argument('resource_group_name', resource_group_name_type)
+
+    with self.argument_context('stack-hci virtualmachine create') as c:
+        c.argument('resource_group_name', resource_group_name_type)
+        c.argument('name', type=str, help='Name of the virtual machine')
+        c.argument('location', arg_type=get_location_type(self.cli_ctx), required=False,
+                   validator=get_default_location_from_resource_group)
+        c.argument('tags', tags_type)
+        c.argument('extended_location', action=AddVirtualmachinesExtendedLocation, nargs='+', help='')
+        c.argument('hardware_profile', action=AddHardwareProfile, nargs='+', help='HardwareProfile - Specifies the '
+                   'hardware settings for the virtual machine.')
+        c.argument('image_reference', type=str, help='ImageReference - gallery image name the vm should use to provision')
+        c.argument('network_profile', action=AddNetworkProfile, nargs='+', help='NetworkProfile - describes the '
+                   'network configuration the virtual machine')
+        c.argument('nic_id', type=str, help='nicID - Network Interface id to attach to the virtual machine.')
+        ## Don't change the order of the lines, because linux_configuration builds on os_profile;
+        ## Starting here
+        c.argument('os_profile', type=validate_file_or_dict, help='OsProfile - describes the configuration of the '
+                   'operating system and sets login data Expected value: json-string/@json-file.')
+        c.argument('linux_configuration', action=AddLinuxConfiguration, nargs='*', help='Linux configuration - '
+                   'specifies ssh keys for the virtual machine')
+        ## end here
+        c.argument('windows_configuration', type=validate_file_or_dict, help='Windows configuration -'
+                    'Windows Configuration for the virtual machine ')
+        c.argument('security_profile', action=AddSecurityProfile, nargs='+', help='SecurityProfile - Specifies the '
+                   'security settings for the virtual machine.')
+        c.argument('storage_profile', type=validate_file_or_dict, help='StorageProfile - contains information about '
+                   'the disks and storage information for the virtual machine Expected value: json-string/@json-file.')
+        c.argument('provisioning_state', type=str, help='Provisioning State')
+        c.argument('status', type=validate_file_or_dict, help='MOCVirtualMachineStatus defines the observed state of '
+                   'MOCVirtualMachine Expected value: json-string/@json-file.')
+        c.argument('vm_size', type=str, help='VMSize - stock vm hardware configuration to use')
+
+    with self.argument_context('stack-hci virtualmachine update') as c:
+        c.argument('resource_group_name', resource_group_name_type)
+        c.argument('name', type=str, help='Name of the virtual machine', id_part='name')
+        c.argument('tags', tags_type)
+        c.argument('cpu_count', type=int, help='number of processors for the virtual machine')
+        c.argument('memory_gb', type=int, help='RAM in gb for the virtual machine')
+        c.argument('vnic_names', type=str, nargs='+', help='List of vnic names')
+        c.argument('vhd_names', type=str, nargs='+', help='List of virtual hard disk names')
+
+    with self.argument_context('stack-hci virtualmachine delete') as c:
+        c.argument('resource_group_name', resource_group_name_type)
+        c.argument('name', type=str, help='Name of the virtual machine', id_part='name')
+
+    with self.argument_context('stack-hci virtualmachine show') as c:
+        c.argument('resource_group_name', resource_group_name_type)
+        c.argument('name', type=str, help='Name of the virtual machine', id_part='name')
+
+    with self.argument_context('stack-hci virtualmachine start') as c:
+        c.argument('resource_group_name', resource_group_name_type)
+        c.argument('name', type=str, help='Name of the virtual machine', id_part='name')
+    
+    with self.argument_context('stack-hci virtualmachine restart') as c:
+        c.argument('resource_group_name', resource_group_name_type)
+        c.argument('name', type=str, help='Name of the virtual machine', id_part='name')
+
+    with self.argument_context('stack-hci virtualmachine stop') as c:
+        c.argument('resource_group_name', resource_group_name_type)
+        c.argument('name', type=str, help='Name of the virtual machine', id_part='name')
+
+    with self.argument_context('stack-hci virtualmachine vnic add') as c:
+        c.argument('resource_group_name', resource_group_name_type)
+        c.argument('name', type=str, help='Name of the virtual machine', id_part='name')
+        c.argument('vnic_names', type=str, nargs='+', help='List of vnic names')
+
+    with self.argument_context('stack-hci virtualmachine vnic remove') as c:
+        c.argument('resource_group_name', resource_group_name_type)
+        c.argument('name', type=str, help='Name of the virtual machine', id_part='name')
+        c.argument('vnic_names', type=str, nargs='+', help='List of vnic names')
+
+    with self.argument_context('stack-hci virtualnetwork list') as c:
+        c.argument('resource_group_name', resource_group_name_type)
+
+    with self.argument_context('stack-hci virtualnetwork create') as c:
+        c.argument('resource_group_name', resource_group_name_type)
+        c.argument('name', type=str, help='Name of the virtual network')
+        c.argument('location', arg_type=get_location_type(self.cli_ctx), required=False,
+                   validator=get_default_location_from_resource_group)
+        c.argument('tags', tags_type)
+        c.argument('extended_location', action=AddVirtualnetworksExtendedLocation, nargs='+', help='')
+        c.argument('network_type', type=str, help='Type of the network')
+        c.argument('subnets', type=validate_file_or_dict, help='Subnet - list of subnets under the virtual network '
+                   'Expected value: json-string/@json-file.')
+        c.argument('provisioning_state', type=str, help='Provisioning State')
+        c.argument('status', type=validate_file_or_dict, help='MOCVirtualNetworkStatus defines the observed state of '
+                   'MOCVirtualNetwork Expected value: json-string/@json-file.')
+
+    with self.argument_context('stack-hci virtualnetwork update') as c:
+        c.argument('resource_group_name', resource_group_name_type)
+        c.argument('name', type=str, help='Name of the virtual network', id_part='name')
+        c.argument('tags', tags_type)
+
+    with self.argument_context('stack-hci virtualnetwork delete') as c:
+        c.argument('resource_group_name', resource_group_name_type)
+        c.argument('name', type=str, help='Name of the virtual network', id_part='name')
+
+    with self.argument_context('stack-hci virtualnetwork show') as c:
+        c.argument('resource_group_name', resource_group_name_type)
+        c.argument('name', type=str, help='Name of the virtual network', id_part='name')
